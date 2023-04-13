@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>DGX1</title>
+  <title>How to run job using slurm</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -58,13 +58,31 @@
 
   
 <div class="container">    
-  <h3>Basic Instruction for DGX1</h3><br>
+  
   <div class="row">
-    <ul>
-		<li><a href="access_server.html">How to access the server</a></li>
-		<li><a href="https://drive.google.com/file/d/1TCMLBZlrUJ7COEcGvjqsLMc1_cWW1IoT/view?usp=sharing">Video Link for user training</a></li>
-		<li><a href="run_job_using_slurm.html">How to run job using slurm</a></li>
-	</ul>
+  <h3 style="text-transform: uppercase;"><b>How to run job using slurm</b></h3><br>
+	<h5><b>To Check Node Status</b></h5>
+	<code>$sinfo</code> - View information about Slurm nodes and partitions. <a href="https://slurm.schedmd.com/sinfo.html">More Details</a>
+	<h5><b>To Check Status of your job</b></h5>
+	<code>$squeue</code> - view information about jobs located in the Slurm scheduling queue. <a href="https://slurm.schedmd.com/squeue.html">More Details</a>
+	<h5><b>To Run your Job in slurm</b></h5>
+	<code>$sbatch script.sh</code> - Submit a batch script to Slurm. <a href="https://slurm.schedmd.com/sbatch.html">More Details</a>
+	<h6><b>Sample script.sh</b></h6>
+	<code>
+	#!/bin/sh
+#SBATCH --job-name=convunext           # Job name<br>
+#SBATCH --time=24:00:00                     # Time limit hrs:min:sec<br>
+#SBATCH --output=convunext.out             # Standard output and error log<br>
+#SBATCH --cpus-per-task=10                  # Run a task on 10 cpus<br>
+#SBATCH --gres=gpu:2                        # Run a single GPU task<br>
+#SBATCH --mem=128GB                          # Use 32GB of memory.<br>
+#SBATCH --partition=normal               # Use dgx partition.<br>
+##SBATCH --account=f20201723<br>
+.<br>.<br>.
+##Your code goes here.<br>.
+
+	</code>
+    
   </div>
 </div><br>
 
