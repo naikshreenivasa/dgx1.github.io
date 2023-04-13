@@ -77,9 +77,46 @@
 #SBATCH --gres=gpu:2                        # Run a single GPU task<br>
 #SBATCH --mem=128GB                          # Use 32GB of memory.<br>
 #SBATCH --partition=normal               # Use dgx partition.<br>
-##SBATCH --account=f20201723<br>
+
 .<br>.<br>.
 ##Your code goes here.<br>.
+
+	</code>
+	<h6><b>Sample python program script script.sh</b></h6>
+	<code>
+	#!/bin/sh<br>
+#SBATCH --job-name=convunext           # Job name<br>
+#SBATCH --time=24:00:00                     # Time limit hrs:min:sec<br>
+#SBATCH --output=convunext.out             # Standard output and error log<br>
+#SBATCH --cpus-per-task=10                  # Run a task on 10 cpus<br>
+#SBATCH --gres=gpu:6                        # Run a single GPU task<br>
+#SBATCH --mem=128GB                          # Use 32GB of memory.<br>
+#SBATCH --partition=normal               # Use dgx partition.<br>
+<br>
+
+H5_DIR='../glioma_subtyping/patch_data_20x/Astrocytoma_IDH-mutant/'<br>
+SLIDE_DIR='../glioma_subtyping/data/Astrocytoma_IDH-mutant/'<br>
+CSV_PATH='../glioma_subtyping/patch_data_20x/Astrocytoma_IDH-mutant/process_list_autogen.csv'<br>
+devices=-1<br>
+batch_size=4<br>
+num_workers=10<br>
+seed=1<br>
+# ['dp', 'ddp', 'ddp_spawn']<br>
+strategy='ddp'<br>
+epochs=3<br>
+wandb_exp='glioma_subtyping'<br><br>
+
+python train_convunext.py --data_h5_dir $H5_DIR \<br>
+ --data_slide_dir $SLIDE_DIR \<br>
+ --csv_path $CSV_PATH \<br>
+ --devices $devices \<br>
+ --batch_size $batch_size \<br>
+ --seed $seed \<br>
+ --strategy $strategy \<br>
+ --epochs $epochs \<br>
+ --wandb_exp $wandb_exp \<br>
+ --num_workers $num_workers<br><br>
+
 
 	</code>
     

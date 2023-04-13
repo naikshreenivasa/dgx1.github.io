@@ -61,6 +61,19 @@
   
   <div class="row">
   <h3 style="text-transform: uppercase;"><b>Slurm Commands</b></h3><br>
+	<br>
+	<div class="row container" style="background-color:#dad9ff;">
+	<h6><b>To add user to the queue</b></h6>
+		<h6><b>Add user to the queue</b></h6>
+		<code>
+		sacctmgr add user username DefaultAccount=dgxv100
+		</code>
+		<h6><b>To assign GPU to user</b></h6>
+		<code>
+		sacctmgr modify user username set GrpTRES=gres/gpu=2
+		</code><br>&nbsp;
+	</div>
+	<br>
 	<h5><b>To Check Node Status</b></h5>
 	<code>$sinfo</code> - View information about Slurm nodes and partitions. <a href="https://slurm.schedmd.com/sinfo.html">More Details</a>
 	<h5><b>To Check Status of your job</b></h5>
@@ -95,10 +108,12 @@
 	sacctmgr show assoc<br>
 	sacctmgr show assoc | grep locuz<br>
 	</code>
-	<h6><b>To add user to the queue</b></h6>
+	<h6><b>Login to a user</b></h6>
 	<code>
-	sacctmgr add user username DefaultAccount=dgxv100
+	su - username
 	</code>
+	
+	
     
   </div>
 </div><br>
